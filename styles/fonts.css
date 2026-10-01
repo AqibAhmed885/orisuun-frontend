@@ -1,0 +1,116 @@
+@media (min-width: 1440px) {
+  /* Scaled Typography */
+  .h1 {
+    font-size: calc(32px * var(--scale-factor));
+    line-height: calc(44px * var(--scale-factor));
+  }
+  .h2 {
+    font-size: calc(28px * var(--scale-factor));
+    line-height: calc(36px * var(--scale-factor));
+  }
+  .h3 {
+    font-size: calc(24px * var(--scale-factor));
+    line-height: calc(32px * var(--scale-factor));
+  }
+  .h4 {
+    font-size: calc(22px * var(--scale-factor));
+    line-height: calc(32px * var(--scale-factor));
+  }
+  .h5 {
+    font-size: calc(20px * var(--scale-factor));
+    line-height: calc(28px * var(--scale-factor));
+  }
+  .h6 {
+    font-size: calc(18px * var(--scale-factor));
+    line-height: calc(24px * var(--scale-factor));
+  }
+  .h7 {
+    font-size: calc(16px * var(--scale-factor));
+    line-height: calc(24px * var(--scale-factor));
+  }
+  .h8 {
+    font-size: calc(15px * var(--scale-factor));
+    line-height: calc(20px * var(--scale-factor));
+  }
+  .h9 {
+    font-size: calc(14px * var(--scale-factor));
+    line-height: calc(20px * var(--scale-factor));
+  }
+  .h10 {
+    font-size: calc(13px * var(--scale-factor));
+    line-height: calc(16px * var(--scale-factor));
+  }
+  .h11 {
+    font-size: calc(48px * var(--scale-factor));
+    line-height: calc(58px * var(--scale-factor));
+  }
+  .h12 {
+    font-size: calc(60px * var(--scale-factor));
+  }
+  .h13 {
+    font-size: calc(72px * var(--scale-factor));
+  }
+}
+
+.h1 {
+  font-size: 32px;
+  line-height: 44px;
+}
+
+.h2 {
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.h4 {
+  font-size: 22px;
+  line-height: 32px;
+}
+
+.h5 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.h6 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.h7 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.h8 {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.h9 {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.h10 {
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.h11 {
+  font-size: 48px;
+  line-height: 58px;
+}
+
+.h12 {
+  font-size: 60px;
+}
+
+.h13 {
+  font-size: 72px;
+}

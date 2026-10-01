@@ -1,0 +1,124 @@
+name: Deploy Frontend to Staging
+
+on:
+  push:
+    branches:
+      - staging-main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+          cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ hashFiles('app/**/*', 'components/**/*', 'lib/**/*', 'utils/**/*', 'middleware.ts', 'next.config.mjs') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+            ${{ runner.os }}-nextjs-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: true
+          NEXT_TELEMETRY_DISABLED: 1
+          NODE_OPTIONS: "--max-old-space-size=4096"
+          NEXT_PUBLIC_APP_BASE_URL: https://staging-api.orisuun.com
+          NEXT_PUBLIC_STRIPE_PUBLIC_KEY: pk_test_51OssK1BOyWHELjbjy7d77ajLCS43yxCfnvkVOzl62EZ36HiaBWBf1ljqTgfSzTtJlFOwrAY9JqpKo02omvRWpQ5z00kfqqqo1K
+          NEXT_PUBLIC_STRIPE_BWF_PUBLIC_KEY: pk_test_51P4UjQKwjZqBW5VIvk8RbJoraD18wyieJK8PnCSnpTgTb8yKXk33vdZjV2MjHdd6z9N7BXHAqbjkYUwVL5enKfHY00wY3cbzVA
+          NEXT_PUBLIC_STRIPE_ESCROW_PUBLIC_KEY: pk_test_51P4VZPLUJnO2hpuYz4UN4onEDLi6mLWY2IoWCGgwJ79O0Sjh8a1kAPoYzQzmddtqFTYhPKaghxekBfap64ZY2y2y00jVzHHzJW
+          NEXT_PUBLIC_PAYPAL_CLIENT_ID: AaUvowFTOcB5La2vMnaWOsGyhZJMNUwRibg4wLIZ2IWTdl9fuG_hAppYHztt5Qd4EuojyYQBJzmfshRN
+          NEXT_PUBLIC_PAYPAL_TEST_MODE: 'true'
+          NEXT_PUBLIC_SIGNALR_HUB_URL: https://staging-api.orisuun.com/chatHub
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: 6LeMRQorAAAAABqZIJvy7710RDrvWxBtQW7ZFf-b
+          NEXT_PUBLIC_API_KEY: lLBHnYLgfgYJe3dWFPSh1GygffGUcOA9JQrRbWdL5UiHg75QGcDjofnJcKyH5
+          NEXT_AUTH_SECRET: bdQLvTGQoQP2DcG6A1kJmkLTMLRzL8h/b2LLlulZbRw=
+          NEXTAUTH_URL: https://staging.orisuun.com
+          NEXT_GOOGLE_CLIENT_ID: 46265125448-6qj5h5hla1dk7p8e0aq62pvctscp4g5b.apps.googleusercontent.com
+          NEXT_GOOGLE_CLIENT_SECRET: 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
+          NEXT_LINKEDIN_CLIENT_ID: 784rp02l1vagiw
+          NEXT_LINKEDIN_CLIENT_SECRET: WPL_AP1.q1pGJLB5oQy5EJdg.ZPrOUQ==
+          NEXT_AZURE_APP_ID: 97692f0a-f8fa-4e77-b4d0-9277ce41107b
+          NEXT_AZURE_TENANT_ID: 9188040d-6c67-4c5b-b112-36a304b66dad
+          NEXT_AZURE_SECRET_ID: nF48Q~42A6LLfkU4OnBPQ~0MapByOWCkkqLtWa93
+          NEXT_APPLE_CLIENT_SECRET: eyJhbGciOiJFUzI1NiIsImtpZCI6Ijk1MzRLNTUzSDQifQ.eyJhdWQiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiaXNzIjoiNlpHOVZQN1I5UiIsImlhdCI6MTczODEzOTgxOSwiZXhwIjoxNzUzNjkxODIwfQ.4EL8ArqpZtgHYjoqgxan3UB1Ushw38YiOeXr60BgKr-WaBS7fip3Vam8DD8DJQsPluardh7gjbG0wfSYZEj9tQcds
+          NEXT_APPLE_CLIENT_ID: io.orisuun.auth
+          RECAPTCHA_SECRET_KEY: 6LeMRQorAAAAAOTd8Gw8aGmCDqrdfZE0tx0nuIWW
+          NEXT_PUBLIC_STATIC_URL: https://orisuun.com/static
+
+        
+
+      - name: Create Deployment Artifact
+        run: |
+          npm prune --production
+          tar -czf release-staging.tar.gz .next public package.json next.config.mjs ecosystem.staging.config.js node_modules
+
+      - name: Deploy to Linode (Staging)
+        run: |
+          set -euo pipefail
+          echo "$ssh_key" > ~/ssh_key
+          chmod 600 ~/ssh_key
+
+          SSH_OPTS="-i ~/ssh_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=20"
+
+          scp $SSH_OPTS release-staging.tar.gz "$user"@"$target_ip":/var/www/frontend-staging/release-staging.tar.gz
+
+          ssh -T $SSH_OPTS "$user"@"$target_ip" << 'DEPLOY_EOF'
+            set -euo pipefail
+            cd /var/www/frontend-staging
+
+            tar -xzf release-staging.tar.gz
+            rm release-staging.tar.gz
+
+            # Reload application with ecosystem config
+            pm2 startOrReload ecosystem.staging.config.js --update-env
+
+            # Health check
+            echo "Waiting for staging app to start..."
+            HEALTHY=false
+            for i in $(seq 1 30); do
+              if curl -sf http://localhost:3001 > /dev/null 2>&1; then
+                echo "Staging app is healthy!"
+                HEALTHY=true
+                break
+              fi
+              sleep 1
+            done
+
+            if [ "$HEALTHY" != "true" ]; then
+              echo "Staging app failed health check."
+              pm2 logs orisuun-nextjs-staging --lines 80 --nostream 2>/dev/null || true
+              exit 1
+            fi
+
+            pm2 save
+            pm2 flush 2>/dev/null || true
+
+            echo "Staging deployment complete!"
+          DEPLOY_EOF
+        env:
+          ssh_key: ${{ secrets.linodenewSSH }}
+          user: "root"
+          target_ip: 66.175.208.111

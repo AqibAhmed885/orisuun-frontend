@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "target": "ES6",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/(dashboard)/(auth)/(account)/signup/components/Profile.js",
+    "app/(dashboard)/(auth)/(account)/signup/components/Profile.js",
+    "components/marketing/Homepage/Who.js",
+    "app/(marketing)/marketing-feedback/page.js",
+    "app/(marketing)/[userType]/page.tsx",
+    "app/event-pdf/[date]/page.jsx",
+    "data/dashboard/dashboardData.js",
+    "data/dashboard/fundraising.tsx",
+    "data/dashboard/profile.tsx"
+, "app/(landing)/layout.js", "components/not-found.tsx", "data/marketing/discount.js", "app/(marketing)/pricing/page.js"  ],
+  "exclude": [
+    "node_modules",
+    "**/*.js"
+  ]
+}

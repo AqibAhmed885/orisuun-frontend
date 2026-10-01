@@ -1,0 +1,220 @@
+.react-calendar {
+  @apply w-full border-0;
+}
+
+.react-calendar__navigation {
+  @apply mb-4 flex justify-between items-center gap-0;
+}
+
+.react-calendar__tile.react-calendar__month-view__days__day:disabled,
+.react-calendar__tile.react-calendar__month-view__days__day:disabled abbr {
+
+  @apply !bg-transparent !text-blue-300;
+}
+
+.react-calendar__navigation__label {
+  @apply font-medium text-sm leading-5 hover:bg-transparent hover:text-black-900 text-black-400;
+}
+
+.react-calendar__navigation__label span {
+  @apply font-semibold text-lg text-blue-500 leading-6;
+}
+
+.react-calendar__navigation__label span:hover {
+  color: black;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  @apply flex items-center justify-center h-8
+}
+
+.react-calendar__month-view__weekdays__weekday abbr[title] {
+  @apply text-xs capitalize no-underline font-semibold hover:bg-transparent hover:text-black-900 text-blue-500;
+}
+
+.react-calendar__navigation__prev-button,
+.react-calendar__navigation__next-button {
+  @apply text-transparent text-base flex relative items-center justify-center min-w-8;
+}
+
+.react-calendar__navigation__prev-button::after {
+  content: '\2039';
+  @apply text-2xl text-gray-600 absolute inset-0 flex items-center justify-center;
+}
+
+.react-calendar__navigation__next-button::after {
+  content: '\203A';
+  @apply text-2xl text-gray-600 absolute inset-0 flex items-center justify-center;
+}
+
+.react-calendar__tile {
+  @apply relative flex flex-col justify-start items-center  max-w-9 w-full h-8 gap-0 rounded-lg p-0 ;
+}
+
+.react-calendar__decade-view__years,
+.react-calendar__century-view__decades {
+  @apply gap-x-2 gap-y-3;
+}
+
+.react-calendar__century-view__decades {
+  @apply justify-around;
+}
+
+.react-calendar__decade-view__years .react-calendar__tile {
+  @apply w-full h-[32px] max-w-[65px] mx-0;
+}
+
+.react-calendar__decade-view__years .react-calendar__tile--hasActive,
+.react-calendar__decade-view__years .react-calendar__tile:hover {
+  @apply text-blue-300 bg-omblue-700;
+}
+
+.own-calendar .react-calendar__decade-view__years .react-calendar__tile--now,
+.own-calendar .react-calendar__decade-view__years .react-calendar__tile--hasActive {
+  @apply !bg-omblue-700 !text-white;
+}
+
+.own-calendar .react-calendar__decade-view__years .react-calendar__tile--now abbr,
+.own-calendar .react-calendar__decade-view__years .react-calendar__tile--hasActive abbr {
+  @apply !rounded-lg !bg-omblue-700 !text-white;
+}
+
+.react-calendar__navigation button:disabled,
+.react-calendar__navigation button:enabled:focus {
+  @apply bg-transparent;
+}
+
+.react-calendar__century-view__decades .react-calendar__tile {
+  @apply w-full h-[32px] min-w-max mx-0;
+}
+
+.react-calendar__century-view__decades .react-calendar__tile--hasActive,
+.react-calendar__century-view__decades .react-calendar__tile:hover {
+  @apply text-blue-300 bg-omblue-700;
+}
+
+.react-calendar__viewContainer.react-calendar__year-view {
+  @apply flex flex-col items-center justify-center;
+}
+
+.react-calendar__viewContainer {
+  @apply p-0
+}
+
+.react-calendar__year-view__months {
+  @apply gap-x-1 gap-y-5 justify-between !grid grid-cols-3;
+}
+
+.react-calendar__year-view__months .react-calendar__tile {
+  @apply w-full h-[32px] max-w-[90px] mx-0;
+}
+
+.react-calendar__year-view__months .react-calendar__tile--hasActive,
+.react-calendar__year-view__months .react-calendar__tile:hover {
+  @apply text-blue-300 bg-omblue-700;
+}
+
+.react-calendar__year-view__months .react-calendar__tile--hasActive abbr,
+.react-calendar__year-view__months .react-calendar__tile:hover abbr {
+  @apply text-white bg-omblue-500;
+}
+
+.react-calendar__tile abbr {
+  @apply w-full h-full flex justify-center items-center text-sm font-normal text-blue-500;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth abbr {
+  @apply text-[#C6C6C6];
+}
+
+.react-calendar__tile--active abbr {
+  @apply bg-omblue-700 text-white font-semibold;
+}
+
+.calendar-selected-day {
+  @apply !bg-omblue-700;
+}
+
+.calendar-selected-day abbr {
+  @apply !bg-omblue-700 !text-white font-semibold;
+}
+
+.calendar-selected-day.react-calendar__tile--now {
+  @apply !bg-omblue-700;
+}
+
+.calendar-selected-day.react-calendar__tile--now abbr {
+  @apply !bg-omblue-700 !text-white;
+}
+
+.calendar-selected-day .calendar-booking-indicator {
+  @apply bg-white;
+}
+
+.react-calendar__tile--active {
+  @apply bg-omblue-700;
+}
+
+.react-calendar__tile--active:not(.react-calendar__tile--rangeStart):not(.react-calendar__tile--rangeEnd) {
+  @apply bg-blue-400;
+}
+
+.react-calendar__tile--active:not(.react-calendar__tile--rangeStart):not(.react-calendar__tile--rangeEnd) abbr {
+  @apply bg-blue-400 text-blue-strong;
+}
+
+.react-calendar__tile:hover abbr,
+.react-calendar__tile:focus abbr {
+  @apply bg-omblue-700 text-white;
+}
+
+.react-calendar__tile--now {
+  @apply !bg-transparent;
+}
+
+.react-calendar__tile--now--active {
+  @apply bg-transparent text-blue-500 font-semibold hover:bg-omblue-700 hover:text-white;
+}
+
+.react-calendar__tile--now abbr {
+  @apply bg-transparent text-blue-500 font-semibold hover:bg-omblue-700 hover:text-white;
+}
+
+.react-calendar button:enabled:hover {
+  @apply bg-black-50 rounded-lg;
+}
+
+.react-calendar__tile--range .react-calendar__month-view__days__day {
+  @apply bg-blue-400 text-blue-strong;
+}
+
+.react-calendar__tile--range .react-calendar__month-view__days__day abbr {
+  @apply bg-blue-400 text-blue-strong;
+}
+
+.react-calendar__month-view__days {
+  @apply !grid grid-cols-7 gap-x-[1px] justify-items-center;
+}
+
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+.react-calendar__tile.react-calendar__month-view__days__day:disabled,
+.react-calendar__tile.react-calendar__year-view__months__month:disabled,
+.react-calendar__tile.react-calendar__decade-view__years__year:disabled,
+.react-calendar__tile.react-calendar__century-view__decades__decade:disabled {
+  @apply bg-transparent text-blue-300;
+}
+
+.react-calendar__tile.react-calendar__month-view__days__day:disabled:hover,
+.react-calendar__tile.react-calendar__year-view__months__month:disabled:hover,
+.react-calendar__tile.react-calendar__decade-view__years__year:disabled:hover,
+.react-calendar__tile.react-calendar__century-view__decades__decade:disabled:hover {
+  @apply bg-transparent text-blue-300;
+}
+
+.react-calendar__tile.react-calendar__month-view__days__day abbr:disabled {
+  @apply bg-transparent text-blue-300;
+}

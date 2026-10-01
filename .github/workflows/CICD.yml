@@ -1,0 +1,131 @@
+name: Deploy to Linode
+
+on:
+  push:
+    branches:
+      - main  # Replace with your main branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+          cache: 'npm'
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ hashFiles('app/**/*', 'components/**/*', 'lib/**/*', 'utils/**/*', 'middleware.ts', 'next.config.mjs') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+            ${{ runner.os }}-nextjs-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: true
+          NEXT_TELEMETRY_DISABLED: 1
+          NODE_OPTIONS: "--max-old-space-size=4096"
+          NEXT_PUBLIC_APP_BASE_URL: ${{ secrets.APP_BASE }}
+          NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${{ secrets.STRIPE_PUBLIC_KEY }}
+          NEXT_PUBLIC_STRIPE_BWF_PUBLIC_KEY: ${{ secrets.STRIPE_BWF_PUBLIC_KEY }}
+          NEXT_PUBLIC_STRIPE_ESCROW_PUBLIC_KEY: ${{ secrets.STRIPE_ESCROW_PUBLIC_KEY }}
+          NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ secrets.PAYPAL_CLIENT_ID }}
+          NEXT_PUBLIC_PAYPAL_TEST_MODE: 'false'
+          NEXT_PUBLIC_SIGNALR_HUB_URL: ${{ secrets.APP_BASE }}/chatHub
+          NEXT_PUBLIC_MEDIA_URL: ${{ secrets.MEDIA_URL }}
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
+          NEXT_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_API_KEY }}
+          NEXT_AUTH_SECRET: ${{ secrets.NEXT_AUTH_SECRET }}
+          NEXTAUTH_URL: https://orisuun.com
+          NEXT_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_GOOGLE_CLIENT_ID }}
+          NEXT_GOOGLE_CLIENT_SECRET: ${{ secrets.NEXT_GOOGLE_CLIENT_SECRET }}
+          NEXT_LINKEDIN_CLIENT_ID: ${{ secrets.NEXT_LINKEDIN_CLIENT_ID }}
+          NEXT_LINKEDIN_CLIENT_SECRET: ${{ secrets.NEXT_LINKEDIN_CLIENT_SECRET }}
+          NEXT_AZURE_APP_ID: ${{ secrets.NEXT_AZURE_APP_ID }}
+          NEXT_AZURE_TENANT_ID: ${{ secrets.NEXT_AZURE_TENANT_ID }}
+          NEXT_AZURE_SECRET_ID: ${{ secrets.NEXT_AZURE_SECRET_ID }}
+          NEXT_APPLE_CLIENT_ID: ${{ secrets.NEXT_APPLE_CLIENT_ID }}
+          NEXT_APPLE_CLIENT_SECRET: ${{ secrets.NEXT_APPLE_CLIENT_SECRET }}
+          RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+          NEXT_PUBLIC_STATIC_URL: ${{ secrets.NEXT_PUBLIC_STATIC_URL }}
+
+      - name: Create Deployment Artifact
+        run: |
+          # Prune dev dependencies to reduce size
+          npm prune --production
+          # Create a compressed tarball of necessary files
+          tar -czf release.tar.gz .next public package.json next.config.mjs ecosystem.config.js node_modules
+
+      - name: Deploy to Linode
+        run: |
+          # Save SSH key
+          echo "$ssh_key" > ~/ssh_key
+          chmod 600 ~/ssh_key
+
+          SSH_OPTS="-i ~/ssh_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=30 -o ServerAliveCountMax=20"
+
+          # Upload the tarball
+          scp $SSH_OPTS release.tar.gz "$user"@"$target_ip":/var/www/frontend/release.tar.gz
+
+          # Execute deployment commands on server
+          ssh -T $SSH_OPTS "$user"@"$target_ip" << 'DEPLOY_EOF'
+            set -euo pipefail
+            cd /var/www/frontend
+
+            # Extract the new release
+            tar -xzf release.tar.gz
+            rm release.tar.gz
+
+            # Reload application with ecosystem config
+            pm2 startOrReload ecosystem.config.js --update-env
+
+            # Health check: wait for app to be ready
+            echo "Waiting for app to start..."
+            HEALTHY=false
+            for i in $(seq 1 30); do
+              if curl -sf http://localhost:3000 > /dev/null 2>&1; then
+                echo "App is healthy!"
+                HEALTHY=true
+                break
+              fi
+              sleep 1
+            done
+
+            if [ "$HEALTHY" != "true" ]; then
+              echo "App failed health check."
+              pm2 logs orisuun-nextjs --lines 80 --nostream 2>/dev/null || true
+              exit 1
+            fi
+
+            # Save PM2 process list
+            pm2 save
+
+            # Clean up old PM2 logs
+            pm2 flush 2>/dev/null || true
+
+            echo "Deployment complete!"
+          DEPLOY_EOF
+        env:
+          ssh_key: ${{ secrets.linodenewSSH }}
+          user: "root"
+          target_ip: 66.175.208.111

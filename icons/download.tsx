@@ -1,0 +1,27 @@
+import React from 'react';
+interface LogoProps extends React.SVGProps<SVGSVGElement> {}
+const Download: React.FC<LogoProps> = (props) => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            width="20"
+            height="20"
+            x="0"
+            y="0"
+            viewBox="0 0 24 24"
+            {...props}
+        >
+            <g>
+                <path
+                    d="M21 19H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2zM12 2a1 1 0 0 0-1 1v10.59l-3.29-3.3a1 1 0 0 0-1.42 1.42l5 5a1 1 0 0 0 1.42 0l5-5a1 1 0 0 0-1.42-1.42L13 13.59V3a1 1 0 0 0-1-1z"
+                    fill="currentColor"
+                    opacity="1"
+                    data-original="#000000"
+                ></path>
+            </g>
+        </svg>
+    );
+};
+
+export default Download;

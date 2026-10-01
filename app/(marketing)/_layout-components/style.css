@@ -1,0 +1,6 @@
+.sticky-footer {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 50 !important;
+  }
+  

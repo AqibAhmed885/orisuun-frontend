@@ -1,0 +1,118 @@
+/* Critical CSS for UserType page */
+
+/* Loading skeleton animation */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Hero section critical styles */
+.user-type-hero {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: #001E5F;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #64748b;
+  max-width: 600px;
+}
+
+/* Section container styles */
+.section-container {
+  padding: 3rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card section styles */
+.card-section {
+  padding: 2rem 0;
+  background: #ffffff;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Pricing section styles */
+.pricing-section {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  padding: 4rem 1rem;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.pricing-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Performance optimizations */
+.user-type-page {
+  contain: layout style paint;
+}
+
+.user-type-page img {
+  will-change: transform;
+}
+
+/* Responsive optimizations */
+@media (max-width: 768px) {
+  .user-type-hero {
+    padding: 2rem 1rem;
+    min-height: 60vh;
+  }
+  
+  .section-container {
+    padding: 2rem 1rem;
+  }
+  
+  .pricing-section {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .loading-skeleton {
+    animation: none;
+  }
+  
+  .pricing-card {
+    transition: none;
+  }
+  
+  .pricing-card:hover {
+    transform: none;
+  }
+}

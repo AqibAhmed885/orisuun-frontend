@@ -1,0 +1,198 @@
+[
+  {
+    "type": "Welcome",
+    "logo": "MiniLogo",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "Welcome to Orisuun!"
+    },
+    "contentDetails": {
+      "content": "Welcome, welcome, welcome! We’re all glad you’re here. We need you! There’s a lot going on. Please get involved. Start making a difference! 🎉"
+    },
+    "icon": "🎉"
+  },
+  {
+    "type": "New Profile",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "New Profile Created! 🎉",
+      "badgeText": "Expert",
+      "badgeColor": "bg-green-500"
+    },
+    "user": {
+      "username": "Sade Chukwu",
+      "avatarUrl": "https://orisuundocumentsdev.blob.core.windows.net/user-profile/defaultuser.png",
+      "avatarAlt": "Sade Chukwu"
+    },
+    "contentDetails": {
+      "content": "New (account type) member in (city)!!"
+    },
+    "campaign": {
+      "actionUrl": "/profile/sade-chukwu"
+    },
+    "actionLabel": "View Profile"
+  },
+  {
+    "type": "Chatter",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "New number one chatter!!",
+      "subTitle": "",
+      "badgeText": "Expert",
+      "badgeColor": "bg-green-500"
+    },
+    "user": {
+      "username": "Sade Chukwu",
+      "avatarUrl": "https://orisuundocumentsdev.blob.core.windows.net/user-profile/defaultuser.png",
+      "avatarAlt": "Sade Chukwu"
+    },
+    "contentDetails": {
+      "content": "(Name) has chatted with more members than anyone else across the whole platform!",
+      "subTitle": "See what (name) is talking about."
+    },
+    "logo": "MiniLogo",
+    "campaign": {
+      "actionUrl": "/profile/sade-chukwu"
+    },
+    "actionLabel": "View Profile"
+  },
+  {
+    "type": "Reviews",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "New number one leader for reviews given!!",
+      "badgeText": "Expert",
+      "badgeColor": "bg-green-500"
+    },
+    "user": {
+      "username": "Sade Chukwu",
+      "avatarUrl": "https://orisuundocumentsdev.blob.core.windows.net/user-profile/defaultuser.png",
+      "avatarAlt": "Sade Chukwu"
+    },
+    "contentDetails": {
+      "content": "(Name) is everyone's favorite! Check out their profile to find out why."
+    },
+    "logo": "MiniLogo",
+    "campaign": {
+      "actionUrl": "/profile/sade-chukwu"
+    },
+    "actionLabel": "View Profile"
+  },
+  {
+    "type": "Discount",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "New Discount Created"
+    },
+    "user": {
+      "username": "Sade Chukwu",
+      "avatarUrl": "https://orisuundocumentsdev.blob.core.windows.net/user-profile/defaultuser.png",
+      "avatarAlt": "Sade Chukwu"
+    },
+    "contentDetails": {
+      "content": "(Name) created a new discount!",
+      "discountTitle": "(Discount title)",
+      "availableTo": "Available to businesses (or will say) Available to all.",
+      "expiryDate": "05 Jan, 2024"
+    },
+    "campaign": {
+      "actionUrl": "/discounts"
+    },
+    "actionLabel": "See Discount"
+  },
+  {
+    "type": "Inspo",
+    "logo": "MiniLogo",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "Daily Inspo!"
+    },
+    "contentDetails": {
+      "content": "“ If you can't fly then run, if you can't run then walk, if you can't walk then crawl, but whatever you do you have to keep moving forward.”",
+      "inspoAuthor": "Martin Luther King, Jr"
+    }
+  },
+  {
+    "type": "Milestone",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "New Membership Milestone Achieved!",
+      "badgeText": "B",
+      "badgeColor": "bg-blue-500"
+    },
+    "contentDetails": {
+      "content": "We hit 100/500/1000/2k active (account types) in (country) today!",
+      "milestoneImages": [
+        "hello",
+        "hello",
+        "hello"
+      ]
+    },
+    "logo": "MiniLogo"
+  },
+  {
+    "type": "Fundraising Campaign Created",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "New Fundraising Campaign Created",
+      "badgeText": "Expert",
+      "badgeColor": "bg-green-500"
+    },
+    "user": {
+      "username": "Sade Chukwu",
+      "avatarUrl": "https://orisuundocumentsdev.blob.core.windows.net/user-profile/defaultuser.png",
+      "avatarAlt": "Sade Chukwu"
+    },
+    "contentDetails": {
+      "content": "(Name) created a new fundraising campaign for [purpose]!",
+      "subTitle": "Help them reach their goal."
+    },
+    "campaign": {
+      "actionUrl": "/campaigns"
+    },
+    "actionLabel": "View Campaign"
+  },
+  {
+    "type": "Fundraising Goals",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "Fundraising Campaign Goal Reached!",
+      "badgeText": "Expert",
+      "badgeColor": "bg-green-500"
+    },
+    "user": {
+      "username": "Sade Chukwu",
+      "avatarUrl": "https://orisuundocumentsdev.blob.core.windows.net/user-profile/defaultuser.png",
+      "avatarAlt": "Sade Chukwu"
+    },
+    "contentDetails": {
+      "content": "(Name) has reached their fundraising goal of (amount)!",
+      "subTitle": "Congratulations!"
+    },
+    "campaign": {
+      "actionUrl": "/campaigns"
+    },
+    "actionLabel": "View Campaign"
+  },
+  {
+    "type": "New Vacancy",
+    "metadata": {
+      "createDate": "5<sup>th</sup> Dec, 7:30 PM",
+      "title": "New Co-founder Opportunity!",
+      "badgeText": "Expert",
+      "badgeColor": "bg-green-500"
+    },
+    "user": {
+      "username": "Sade Chukwu",
+      "avatarUrl": "https://orisuundocumentsdev.blob.core.windows.net/user-profile/defaultuser.png",
+      "avatarAlt": "Sade Chukwu"
+    },
+    "contentDetails": {
+      "content": "(Name) is looking for a co-founder for their (industry) business! Check it out!"
+    },
+    "campaign": {
+      "actionUrl": "/opportunities"
+    },
+    "actionLabel": "View Opportunity"
+  }
+]

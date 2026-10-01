@@ -1,0 +1,51 @@
+export const quotes = {
+    t1: [
+        'Find co-founders, board members, & revenue-generating business opportunities',
+        'Get your business funded by peers, sponsors, and general supporters',
+        'Reduce your business costs with significant discounts from fellow Black-owned businesses & our sponsors',
+        'Take care of business on Orisuun safely with our escrow and dispute resolution system',
+        'Chat securely with your mentors, strategy consultants, and professionals',
+        'Incentivize new customers with discounts just for them',
+        'Get found by interested professional investors',
+        'Get found by interested customers looking for a business just like yours',
+    ],
+    t3: [
+        'Make an impact sharing your expertise and experience with Black-owned businesses of all sizes, in all fields',
+        'Have peace of mind knowing peer-to-peer transactions on our platform are backed by a world-class escrow system and dispute resolution system',
+        'Double and triple your impact by forming teams with investors, advisors, consultants, and mentors',
+        'Make donation-based investments in Black-owned businesses in your neighborhood and around the world',
+        'Increase your visibility and get found by businesses looking for expertise exactly like yours',
+    ],
+    t7: [
+        'Search our global database of Black-owned businesses at all stages',
+        'Chat securely with your investment prospects, strategy consultants, and professionals',
+        'Invest directly (debt or equity) in Black-owned businesses (coming 2025)',
+    ],
+    t2: [
+        'Make an impact sharing your knowledge and experience with Black-owned businesses of all sizes, in all fields',
+        'Have peace of mind knowing peer-to-peer transactions on our platform are backed by a world-class escrow system and dispute resolution system',
+        'Double and triple your impact by forming teams with investors, advisors, consultants, and mentors',
+        'Make donation-based investments in Black-owned businesses in your neighborhood and around the world',
+        'Increase your visibility and get found by businesses looking for services exactly like yours',
+    ],
+    t6: [
+        'Make an impact sharing your knowledge and experience with Black-owned businesses of all sizes, in all fields',
+        'Have peace of mind knowing peer-to-peer transactions on our platform are backed by a world-class escrow system and dispute resolution system',
+        'Double and triple your impact by forming teams with investors, advisors, consultants, and mentors',
+        'Make donation-based investments in Black-owned businesses in your neighborhood and around the world',
+        'Increase your visibility and get found by businesses looking for services exactly like yours',
+    ],
+    t8: [
+        'Make an impact sharing your knowledge and experience with Black-owned businesses of all sizes, in all fields ',
+        'Have peace of mind knowing peer-to-peer transactions on our platform are backed by a world-class escrow system and dispute resolution system',
+        'Double and triple your impact by forming teams with investors, advisors, consultants, and professionals',
+        'Make donation-based investments in Black-owned businesses in your neighborhood and around the world',
+    ],
+    t4: [
+        'Find Black-owned businesses to support in your neighborhood and around the world',
+        'Give valuable public or private feedback to the businesses you’ve encountered',
+        'Make donation-based investments in Black-owned businesses in your neighborhood and around the world',
+        'Show your friends how committed you are to supporting Black-owned businesses as you rise up our leaderboards for your city, country, and continent',
+        'Take advantage of the exclusive discounts offered just to you from Black-owned businesses',
+    ],
+};

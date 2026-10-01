@@ -1,0 +1,1 @@
+export const BASE_URL = 'https://orisuundocumentsdev.blob.core.windows.net/user-profile/defaultuser.png'; 
